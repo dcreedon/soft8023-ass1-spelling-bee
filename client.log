@@ -1,0 +1,74 @@
+C:\Users\damian.creedon\AppData\Local\Programs\Python\Python39\python.exe "C:/Damian One Drive Files/mtu/PycharmProjects/soft8023-ass1-spelling-bee/app/client/client.py"
+Launching connection to Game Server...
+connecting
+New game (n) or join existing (e) : n
+Enter your first name : damian
+starting a new game
+starting new game loop
+(ex) to exit game
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 0
+Enter word : receive
+ Valid word Score is : 7
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 7
+Enter word : deceive
+ Valid word Score is : 7
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 14
+Enter word : vice
+ Valid word Score is : 1
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 15
+Enter word : mice
+Sorry the word [ mice ] contains letters other than these : ['o', 'c', 'v', 'e', 'i', 'd', 'r']
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 15
+Enter word : drive
+ Valid word Score is : 5
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 20
+Enter word : drive
+Sorry the word [ drive ] has already been found :-(
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 20
+Enter word : revoiced
+It's a Pangram! Bonus Score is: 7 Valid word Score is : 15
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+Enter word : axe
+Sorry the word you entered is less than 4 letters long, words of four or more letters please!
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+Enter word : axes
+Sorry the word you entered contains the letter S no S's please !
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+Enter word : axed
+Sorry the word does not contain the centre letter : I
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+Enter word : nixed
+Sorry the word [ nixed ] contains letters other than these : ['o', 'c', 'v', 'e', 'i', 'd', 'r']
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+Enter word : ex
+
+Goodbye, Game Ended!
+
+Letters :   O   C   V   E [I]  D   R
+Total Score : 35
+
+Process finished with exit code 0
