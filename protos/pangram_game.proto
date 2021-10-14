@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package app;
+
+service PangramGame {
+  rpc CreateGame(GameRequest) returns (GameResponse) {}
+  rpc StartGame(StartGameRequest) returns (StartGameResponse) {}
+  rpc CheckWord(CheckWordRequest) returns (CheckWordResponse) {}
+  rpc JoinGame(JoinGameRequest) returns (JoinGameResponse) {}
+  rpc LeaveGame(LeaveGameRequest) returns (LeaveGameResponse) {}
+  rpc EndGame(EndGameRequest) returns (EndGameResponse) {}
+}
+
+message GameRequest {
+  string playerName = 1;
+  string gameType = 2;
+}
+
+message GameResponse {
+  bytes gameId = 1;
+}
+
+message StartGameRequest {
+  bytes gameId = 1;
+}
+
+message StartGameResponse {
+  string message = 1;
+}
+
+message CheckWordRequest {
+  bytes gameId = 1;
+  string playerWord = 2;
+}
+
+message CheckWordResponse {
+  string gameStatusMessage = 1;
+  string wordCheckMessage = 2;
+}
+
+message JoinGameRequest {
+  bytes gameId = 1;
+}
+
+message JoinGameResponse {
+  string message = 1;
+}
+
+message LeaveGameRequest {
+  bytes gameId = 1;
+}
+
+message LeaveGameResponse {
+  string message = 1;
+}
+
+message EndGameRequest {
+  bytes gameId = 1;
+}
+
+message EndGameResponse {
+  string message = 1;
+}
