@@ -32,4 +32,5 @@ the object factory could be used to launch a word gae variant with different val
 PangGame(GameManager, GameTurnTemplate) uses the abstract classes defined in game_service.py.
 
 
-#Client Log contains a sample run of the code
+# Client Log contains a sample run of the code
+# Server side console output displays the pangram used to allow you to test pangram entry and scoring

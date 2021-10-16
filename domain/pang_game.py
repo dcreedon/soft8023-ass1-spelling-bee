@@ -22,9 +22,15 @@ class PangGame:
     def add_letters(self, letters):
         self.letters = list(set(letters)) # only add unique letters
 
-
     def add_centre_letter(self, letter):
         self.centre_letter = letter
+
+    def put_centre_in_middle(self):
+        centre_position = 3
+        centre_letter_position = self.letters.index(self.centre_letter)
+        if (self.letters[centre_position] != self.centre_letter) :
+            self.letters[centre_letter_position] = self.letters[centre_position]
+            self.letters[centre_position] = self.centre_letter
 
     def add_found_word(self, word, word_score):
         self.found_words[word] = word_score

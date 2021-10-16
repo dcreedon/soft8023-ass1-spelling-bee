@@ -12,6 +12,7 @@ class PangGame(GameManager, GameTurnTemplate):
         self.pangram_dictionary = self.wordDictionary.create_pangram_dict()
         self.game.add_letters(word_dictionary.GameDictionary.random_word(self.pangram_dictionary))  # choose the word/letters from the pangram dictionary
         self.game.add_centre_letter(word_dictionary.GameDictionary.random_letter(self.game.letters))     # choose the centre letter from the word
+        self.game.put_centre_in_middle() # put the centre letter in the middle of the list
 
     def set_dictionary(self, word_dictionary):
         self.wordDictionary = word_dictionary
@@ -92,7 +93,7 @@ class PangGame(GameManager, GameTurnTemplate):
     def game_summary(self):
         # output the letters, current score
         line_break ="\n"
-        # construct the letter output and enclose the centre letter with a []
+        # construct the letter output and enclose the centre letter with []
         letters = "Letters : "
         for letter in self.game.letters:
             if letter == self.game.centre_letter :
