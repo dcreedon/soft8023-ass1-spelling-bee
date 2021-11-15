@@ -12,6 +12,7 @@ https://en.wikipedia.org/wiki/Pangram
 - would be easy enough to paramaterise to use different dictionaries for different games/implementations
 - also could paramaterise the scoring/bonus etc... for pangram game variations
 - tried to build reusable methods into word_dictionary, pang_game
+- considered upcoming multiplayer assignment when building
 
 # command to run to create proto file for grpc
 python -m grpc_tools.protoc -I../protos --python_out=. --grpc_python_out=. ../protos/pangram_game.proto
