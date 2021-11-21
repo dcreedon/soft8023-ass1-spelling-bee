@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12pangram_game.proto\x12\x03\x61pp\"3\n\x0bGameRequest\x12\x12\n\nplayerName\x18\x01 \x01(\t\x12\x10\n\x08gameType\x18\x02 \x01(\t\"\x1e\n\x0cGameResponse\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"\"\n\x10StartGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"$\n\x11StartGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"6\n\x10\x43heckWordRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\x12\x12\n\nplayerWord\x18\x02 \x01(\t\"H\n\x11\x43heckWordResponse\x12\x19\n\x11gameStatusMessage\x18\x01 \x01(\t\x12\x18\n\x10wordCheckMessage\x18\x02 \x01(\t\"!\n\x0fJoinGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"#\n\x10JoinGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\"\n\x10LeaveGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"$\n\x11LeaveGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x0e\x45ndGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"\"\n\x0f\x45ndGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xef\x02\n\x0bPangramGame\x12\x33\n\nCreateGame\x12\x10.app.GameRequest\x1a\x11.app.GameResponse\"\x00\x12<\n\tStartGame\x12\x15.app.StartGameRequest\x1a\x16.app.StartGameResponse\"\x00\x12<\n\tCheckWord\x12\x15.app.CheckWordRequest\x1a\x16.app.CheckWordResponse\"\x00\x12\x39\n\x08JoinGame\x12\x14.app.JoinGameRequest\x1a\x15.app.JoinGameResponse\"\x00\x12<\n\tLeaveGame\x12\x15.app.LeaveGameRequest\x1a\x16.app.LeaveGameResponse\"\x00\x12\x36\n\x07\x45ndGame\x12\x13.app.EndGameRequest\x1a\x14.app.EndGameResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x12pangram_game.proto\x12\x03\x61pp\"3\n\x0bGameRequest\x12\x12\n\nplayerName\x18\x01 \x01(\t\x12\x10\n\x08gameType\x18\x02 \x01(\t\"D\n\x0cGameResponse\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\x12\x12\n\ninviteCode\x18\x02 \x01(\t\x12\x10\n\x08playerId\x18\x03 \x01(\x0c\"\"\n\x10StartGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"$\n\x11StartGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"H\n\x10\x43heckWordRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\x12\x12\n\nplayerWord\x18\x02 \x01(\t\x12\x10\n\x08playerId\x18\x03 \x01(\x0c\"H\n\x11\x43heckWordResponse\x12\x19\n\x11gameStatusMessage\x18\x01 \x01(\t\x12\x18\n\x10wordCheckMessage\x18\x02 \x01(\t\"\"\n\x10GameScoreRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"$\n\x11GameScoreResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"9\n\x0fJoinGameRequest\x12\x12\n\ninviteCode\x18\x01 \x01(\t\x12\x12\n\nplayerName\x18\x02 \x01(\t\"E\n\x10JoinGameResponse\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x10\n\x08playerId\x18\x03 \x01(\x0c\"\"\n\x10LeaveGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"$\n\x11LeaveGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x0e\x45ndGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\x0c\"\"\n\x0f\x45ndGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xad\x03\n\x0bPangramGame\x12\x33\n\nCreateGame\x12\x10.app.GameRequest\x1a\x11.app.GameResponse\"\x00\x12<\n\tStartGame\x12\x15.app.StartGameRequest\x1a\x16.app.StartGameResponse\"\x00\x12\x39\n\x08JoinGame\x12\x14.app.JoinGameRequest\x1a\x15.app.JoinGameResponse\"\x00\x12<\n\tCheckWord\x12\x15.app.CheckWordRequest\x1a\x16.app.CheckWordResponse\"\x00\x12<\n\tGameScore\x12\x15.app.GameScoreRequest\x1a\x16.app.GameScoreResponse\"\x00\x12<\n\tLeaveGame\x12\x15.app.LeaveGameRequest\x1a\x16.app.LeaveGameResponse\"\x00\x12\x36\n\x07\x45ndGame\x12\x13.app.EndGameRequest\x1a\x14.app.EndGameResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -79,6 +79,20 @@ _GAMERESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inviteCode', full_name='app.GameResponse.inviteCode', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='playerId', full_name='app.GameResponse.playerId', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -92,7 +106,7 @@ _GAMERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=80,
-  serialized_end=110,
+  serialized_end=148,
 )
 
 
@@ -123,8 +137,8 @@ _STARTGAMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=112,
-  serialized_end=146,
+  serialized_start=150,
+  serialized_end=184,
 )
 
 
@@ -155,8 +169,8 @@ _STARTGAMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=148,
-  serialized_end=184,
+  serialized_start=186,
+  serialized_end=222,
 )
 
 
@@ -182,6 +196,13 @@ _CHECKWORDREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='playerId', full_name='app.CheckWordRequest.playerId', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -194,8 +215,8 @@ _CHECKWORDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=186,
-  serialized_end=240,
+  serialized_start=224,
+  serialized_end=296,
 )
 
 
@@ -233,21 +254,21 @@ _CHECKWORDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=242,
-  serialized_end=314,
+  serialized_start=298,
+  serialized_end=370,
 )
 
 
-_JOINGAMEREQUEST = _descriptor.Descriptor(
-  name='JoinGameRequest',
-  full_name='app.JoinGameRequest',
+_GAMESCOREREQUEST = _descriptor.Descriptor(
+  name='GameScoreRequest',
+  full_name='app.GameScoreRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='gameId', full_name='app.JoinGameRequest.gameId', index=0,
+      name='gameId', full_name='app.GameScoreRequest.gameId', index=0,
       number=1, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
@@ -265,21 +286,21 @@ _JOINGAMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=316,
-  serialized_end=349,
+  serialized_start=372,
+  serialized_end=406,
 )
 
 
-_JOINGAMERESPONSE = _descriptor.Descriptor(
-  name='JoinGameResponse',
-  full_name='app.JoinGameResponse',
+_GAMESCORERESPONSE = _descriptor.Descriptor(
+  name='GameScoreResponse',
+  full_name='app.GameScoreResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='app.JoinGameResponse.message', index=0,
+      name='message', full_name='app.GameScoreResponse.message', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -297,8 +318,93 @@ _JOINGAMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=351,
-  serialized_end=386,
+  serialized_start=408,
+  serialized_end=444,
+)
+
+
+_JOINGAMEREQUEST = _descriptor.Descriptor(
+  name='JoinGameRequest',
+  full_name='app.JoinGameRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='inviteCode', full_name='app.JoinGameRequest.inviteCode', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='playerName', full_name='app.JoinGameRequest.playerName', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=446,
+  serialized_end=503,
+)
+
+
+_JOINGAMERESPONSE = _descriptor.Descriptor(
+  name='JoinGameResponse',
+  full_name='app.JoinGameResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gameId', full_name='app.JoinGameResponse.gameId', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='app.JoinGameResponse.message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='playerId', full_name='app.JoinGameResponse.playerId', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=505,
+  serialized_end=574,
 )
 
 
@@ -329,8 +435,8 @@ _LEAVEGAMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=388,
-  serialized_end=422,
+  serialized_start=576,
+  serialized_end=610,
 )
 
 
@@ -361,8 +467,8 @@ _LEAVEGAMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=424,
-  serialized_end=460,
+  serialized_start=612,
+  serialized_end=648,
 )
 
 
@@ -393,8 +499,8 @@ _ENDGAMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=462,
-  serialized_end=494,
+  serialized_start=650,
+  serialized_end=682,
 )
 
 
@@ -425,8 +531,8 @@ _ENDGAMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=496,
-  serialized_end=530,
+  serialized_start=684,
+  serialized_end=718,
 )
 
 DESCRIPTOR.message_types_by_name['GameRequest'] = _GAMEREQUEST
@@ -435,6 +541,8 @@ DESCRIPTOR.message_types_by_name['StartGameRequest'] = _STARTGAMEREQUEST
 DESCRIPTOR.message_types_by_name['StartGameResponse'] = _STARTGAMERESPONSE
 DESCRIPTOR.message_types_by_name['CheckWordRequest'] = _CHECKWORDREQUEST
 DESCRIPTOR.message_types_by_name['CheckWordResponse'] = _CHECKWORDRESPONSE
+DESCRIPTOR.message_types_by_name['GameScoreRequest'] = _GAMESCOREREQUEST
+DESCRIPTOR.message_types_by_name['GameScoreResponse'] = _GAMESCORERESPONSE
 DESCRIPTOR.message_types_by_name['JoinGameRequest'] = _JOINGAMEREQUEST
 DESCRIPTOR.message_types_by_name['JoinGameResponse'] = _JOINGAMERESPONSE
 DESCRIPTOR.message_types_by_name['LeaveGameRequest'] = _LEAVEGAMEREQUEST
@@ -484,6 +592,20 @@ CheckWordResponse = _reflection.GeneratedProtocolMessageType('CheckWordResponse'
   # @@protoc_insertion_point(class_scope:app.CheckWordResponse)
   })
 _sym_db.RegisterMessage(CheckWordResponse)
+
+GameScoreRequest = _reflection.GeneratedProtocolMessageType('GameScoreRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GAMESCOREREQUEST,
+  '__module__' : 'pangram_game_pb2'
+  # @@protoc_insertion_point(class_scope:app.GameScoreRequest)
+  })
+_sym_db.RegisterMessage(GameScoreRequest)
+
+GameScoreResponse = _reflection.GeneratedProtocolMessageType('GameScoreResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GAMESCORERESPONSE,
+  '__module__' : 'pangram_game_pb2'
+  # @@protoc_insertion_point(class_scope:app.GameScoreResponse)
+  })
+_sym_db.RegisterMessage(GameScoreResponse)
 
 JoinGameRequest = _reflection.GeneratedProtocolMessageType('JoinGameRequest', (_message.Message,), {
   'DESCRIPTOR' : _JOINGAMEREQUEST,
@@ -536,8 +658,8 @@ _PANGRAMGAME = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=533,
-  serialized_end=900,
+  serialized_start=721,
+  serialized_end=1150,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateGame',
@@ -560,19 +682,9 @@ _PANGRAMGAME = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='CheckWord',
-    full_name='app.PangramGame.CheckWord',
-    index=2,
-    containing_service=None,
-    input_type=_CHECKWORDREQUEST,
-    output_type=_CHECKWORDRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
     name='JoinGame',
     full_name='app.PangramGame.JoinGame',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_JOINGAMEREQUEST,
     output_type=_JOINGAMERESPONSE,
@@ -580,9 +692,29 @@ _PANGRAMGAME = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CheckWord',
+    full_name='app.PangramGame.CheckWord',
+    index=3,
+    containing_service=None,
+    input_type=_CHECKWORDREQUEST,
+    output_type=_CHECKWORDRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GameScore',
+    full_name='app.PangramGame.GameScore',
+    index=4,
+    containing_service=None,
+    input_type=_GAMESCOREREQUEST,
+    output_type=_GAMESCORERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='LeaveGame',
     full_name='app.PangramGame.LeaveGame',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_LEAVEGAMEREQUEST,
     output_type=_LEAVEGAMERESPONSE,
@@ -592,7 +724,7 @@ _PANGRAMGAME = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='EndGame',
     full_name='app.PangramGame.EndGame',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_ENDGAMEREQUEST,
     output_type=_ENDGAMERESPONSE,

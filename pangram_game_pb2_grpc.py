@@ -24,15 +24,20 @@ class PangramGameStub(object):
                 request_serializer=pangram__game__pb2.StartGameRequest.SerializeToString,
                 response_deserializer=pangram__game__pb2.StartGameResponse.FromString,
                 )
+        self.JoinGame = channel.unary_unary(
+                '/app.PangramGame/JoinGame',
+                request_serializer=pangram__game__pb2.JoinGameRequest.SerializeToString,
+                response_deserializer=pangram__game__pb2.JoinGameResponse.FromString,
+                )
         self.CheckWord = channel.unary_unary(
                 '/app.PangramGame/CheckWord',
                 request_serializer=pangram__game__pb2.CheckWordRequest.SerializeToString,
                 response_deserializer=pangram__game__pb2.CheckWordResponse.FromString,
                 )
-        self.JoinGame = channel.unary_unary(
-                '/app.PangramGame/JoinGame',
-                request_serializer=pangram__game__pb2.JoinGameRequest.SerializeToString,
-                response_deserializer=pangram__game__pb2.JoinGameResponse.FromString,
+        self.GameScore = channel.unary_unary(
+                '/app.PangramGame/GameScore',
+                request_serializer=pangram__game__pb2.GameScoreRequest.SerializeToString,
+                response_deserializer=pangram__game__pb2.GameScoreResponse.FromString,
                 )
         self.LeaveGame = channel.unary_unary(
                 '/app.PangramGame/LeaveGame',
@@ -61,13 +66,19 @@ class PangramGameServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def JoinGame(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CheckWord(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def JoinGame(self, request, context):
+    def GameScore(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -98,15 +109,20 @@ def add_PangramGameServicer_to_server(servicer, server):
                     request_deserializer=pangram__game__pb2.StartGameRequest.FromString,
                     response_serializer=pangram__game__pb2.StartGameResponse.SerializeToString,
             ),
+            'JoinGame': grpc.unary_unary_rpc_method_handler(
+                    servicer.JoinGame,
+                    request_deserializer=pangram__game__pb2.JoinGameRequest.FromString,
+                    response_serializer=pangram__game__pb2.JoinGameResponse.SerializeToString,
+            ),
             'CheckWord': grpc.unary_unary_rpc_method_handler(
                     servicer.CheckWord,
                     request_deserializer=pangram__game__pb2.CheckWordRequest.FromString,
                     response_serializer=pangram__game__pb2.CheckWordResponse.SerializeToString,
             ),
-            'JoinGame': grpc.unary_unary_rpc_method_handler(
-                    servicer.JoinGame,
-                    request_deserializer=pangram__game__pb2.JoinGameRequest.FromString,
-                    response_serializer=pangram__game__pb2.JoinGameResponse.SerializeToString,
+            'GameScore': grpc.unary_unary_rpc_method_handler(
+                    servicer.GameScore,
+                    request_deserializer=pangram__game__pb2.GameScoreRequest.FromString,
+                    response_serializer=pangram__game__pb2.GameScoreResponse.SerializeToString,
             ),
             'LeaveGame': grpc.unary_unary_rpc_method_handler(
                     servicer.LeaveGame,
@@ -163,6 +179,23 @@ class PangramGame(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def JoinGame(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/app.PangramGame/JoinGame',
+            pangram__game__pb2.JoinGameRequest.SerializeToString,
+            pangram__game__pb2.JoinGameResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CheckWord(request,
             target,
             options=(),
@@ -180,7 +213,7 @@ class PangramGame(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def JoinGame(request,
+    def GameScore(request,
             target,
             options=(),
             channel_credentials=None,
@@ -190,9 +223,9 @@ class PangramGame(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/app.PangramGame/JoinGame',
-            pangram__game__pb2.JoinGameRequest.SerializeToString,
-            pangram__game__pb2.JoinGameResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/app.PangramGame/GameScore',
+            pangram__game__pb2.GameScoreRequest.SerializeToString,
+            pangram__game__pb2.GameScoreResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

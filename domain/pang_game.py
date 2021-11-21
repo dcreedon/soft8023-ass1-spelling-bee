@@ -1,23 +1,26 @@
 from datatype.enums import GameStatus
+from domain import player_record
+import uuid
 
 
 class PangGame:
 
     def __init__(self):
         self.status = GameStatus.INVALID
-        self.players = []
+        self.players = {}
         self.total_score = 0
         self.letters = []
         self.centre_letter = ''
         self.found_words = {} #dictionary to prevent duplicates holds word and associated score
+        self.invite_code = ''
 
-    def register_player(self, username):
-        if username not in self.players:
-            index = len(self.players)
-            self.players.append(username)
-            return index
-        else:
-            return -1
+
+    def register_player(self, playerName):
+        new_player = player_record.PlayerRecord()
+        new_player.playerName = playerName
+        playerId = uuid.uuid4()             #unique player id
+        self.players[playerId] = new_player
+        return playerId
 
     def add_letters(self, letters):
         self.letters = list(set(letters)) # only add unique letters
@@ -43,3 +46,10 @@ class PangGame:
 
     def update_total_score(self, score):
         self.total_score += score
+
+    def add_invite_code(self, invite_code):     # stores the games invite code
+        self.invite_code = invite_code
+
+    def update_player_record(self, word, total_word_score, playerId):       # update the individual player record with the word and score
+        self.players[playerId].words[word]=total_word_score
+

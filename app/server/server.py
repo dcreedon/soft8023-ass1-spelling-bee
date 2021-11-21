@@ -1,14 +1,14 @@
-import logging
 import time
 from concurrent import futures
 
 import grpc
 import uuid
+import pika
 
 from app.gameimpl import pang
 from domain import pang_game
 
-from pangram_game_pb2 import GameResponse, CheckWordResponse, StartGameResponse
+from pangram_game_pb2 import GameResponse, CheckWordResponse, StartGameResponse, JoinGameResponse, GameScoreResponse, EndGameResponse
 
 from pangram_game_pb2_grpc import PangramGameServicer, add_PangramGameServicer_to_server
 from pattern import object_factory
@@ -27,20 +27,31 @@ class GameServer(PangramGameServicer):
         self.registry = GameRegistry.get_instance()
         self.word_dictionary = GameDictionary()
         self.word_dictionary.load_words("words_dictionary.json")
+        #setup rabbit MQ
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        self.channel = self.connection.channel()
+        self.channel.queue_declare(queue='mid-game-stats')
 
     def CreateGame(self, request, context):
         """
-        setup the game instance store it inthe registry, set the game dictionary
+        setup the game instance store it in the registry, set the game dictionary
+        generate the invite code for the game and store it in the registry
         """
         print("Creating Game")
         new_game = self.factory.create(request.gameType)
         game = pang_game.PangGame()  #game instance for game registry to hold game state
-        game.register_player(request.playerName)
+        player_id = game.register_player(request.playerName)
         new_game.set_dictionary(self.word_dictionary)
         new_game.set_game(game)
         game_id = self.registry.add_game(new_game)  #add the new game instance to the registry and get a unique game id
+        #generate invite code, store in game and also in registry for lookup
+        invite_code  = str(game_id)[0:4]       # first four chars of game_id/uuid as the invite code
+        game.add_invite_code(invite_code)       # store the invite code in the game instance
+        self.registry.add_invite_code(invite_code, game_id)     # put the invite code in the regsitry along with the game id to allow lookup of associated game id
+
         print("Game Id : " + str(game_id.bytes))
-        return GameResponse(gameId=game_id.bytes)  #return the unique game id to the client
+        print("Invite Code: " + str(invite_code))
+        return GameResponse(gameId=game_id.bytes, inviteCode=str(invite_code), playerId=player_id.bytes)  #return the unique game id and invite code to the client
 
     def StartGame(self, request, context):
         """
@@ -60,8 +71,8 @@ class GameServer(PangramGameServicer):
         print("Player entered word : " + request.playerWord)
 
         new_game = self.registry.get_game(request.gameId)
-
-        word_check = new_game.validate_word(request.playerWord)
+        playerId = uuid.UUID(bytes=request.playerId)
+        word_check = new_game.validate_word(request.playerWord,playerId)
         print("Word Check Response : " + word_check)
 
         game_summary = new_game.game_summary()
@@ -69,8 +80,29 @@ class GameServer(PangramGameServicer):
 
         return CheckWordResponse(gameStatusMessage=game_summary, wordCheckMessage=word_check)
 
+    def JoinGame(self, request, context):
+        game_id = self.registry.get_game_id_with_invite_code(request.inviteCode)
+
+        new_game = self.registry.get_game_from_invite_code(game_id)
+        player_id = new_game.game.register_player(request.playerName)
+        response = new_game.game_summary()
+        print("Start Game Response : " + response)
+        return JoinGameResponse(gameId=game_id.bytes, message=response, playerId=player_id.bytes)
+
+    def GameScore(self, request, context):
+        new_game = self.registry.get_game(request.gameId)
+        message = new_game.player_word_score_summary()
+        #send stats to rabbit message queue - easier to test
+        self.channel.basic_publish(exchange='', routing_key='mid-game-stats', body=message)
+        return GameScoreResponse(message=message)
+
     def EndGame(self, request, context):
-        return
+        new_game = self.registry.get_game(request.gameId)
+        message = new_game.player_word_score_summary()
+        #close rabbit mq connection
+        #self.connection.close()
+
+        return EndGameResponse(message=message)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -82,5 +114,4 @@ def serve():
 
 if __name__ == '__main__':
     print("Launching Game Server...")
-    logging.basicConfig()
     serve()

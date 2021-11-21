@@ -1,3 +1,34 @@
+Assignment 2
+
+To run:
+
+run server.py
+and client.py or client1.py (both have same code base)
+follow instructions
+n = new game
+e = existing game using code
+
+ex = exit
+sco = player score
+
+Multi player game
+Allows second and subsequent players to start a new game or join an existing live game
+Keeps track of the words and scores for each player along with the overall score
+Allows users to send a command to list all the words per player and the scores
+
+If a player requests the latest score the game Outputs stats to a message Queue using RabbitMQ
+When each player ends the game Outputs stats to a message Queue using RabbitMQ
+
+Implement a socket server that consumes stats messages
+
+Put a component into a docker container
+
+#Approach
+Moved to specific ID's for players
+updated game_registry to store the invite codes for the games
+
+
+Assignment 1
 #Pangrams
 A pangram or holoalphabetic sentence is a sentence using every letter of a given alphabet at least once. 
 
@@ -16,6 +47,7 @@ https://en.wikipedia.org/wiki/Pangram
 
 # command to run to create proto file for grpc
 python -m grpc_tools.protoc -I../protos --python_out=. --grpc_python_out=. ../protos/pangram_game.proto
+or from the spelling bee ass directory  python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/pangram_game.proto
 
 # Patterns Used
  - Singleton pattern used in the game_registry.py , dont want more than one game registry instantiated

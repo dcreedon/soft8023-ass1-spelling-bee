@@ -5,8 +5,9 @@ package app;
 service PangramGame {
   rpc CreateGame(GameRequest) returns (GameResponse) {}
   rpc StartGame(StartGameRequest) returns (StartGameResponse) {}
-  rpc CheckWord(CheckWordRequest) returns (CheckWordResponse) {}
   rpc JoinGame(JoinGameRequest) returns (JoinGameResponse) {}
+  rpc CheckWord(CheckWordRequest) returns (CheckWordResponse) {}
+  rpc GameScore(GameScoreRequest) returns (GameScoreResponse) {}
   rpc LeaveGame(LeaveGameRequest) returns (LeaveGameResponse) {}
   rpc EndGame(EndGameRequest) returns (EndGameResponse) {}
 }
@@ -18,6 +19,8 @@ message GameRequest {
 
 message GameResponse {
   bytes gameId = 1;
+  string inviteCode = 2;
+  bytes playerId = 3;
 }
 
 message StartGameRequest {
@@ -31,6 +34,7 @@ message StartGameResponse {
 message CheckWordRequest {
   bytes gameId = 1;
   string playerWord = 2;
+  bytes playerId = 3;
 }
 
 message CheckWordResponse {
@@ -38,12 +42,23 @@ message CheckWordResponse {
   string wordCheckMessage = 2;
 }
 
-message JoinGameRequest {
+message GameScoreRequest {
   bytes gameId = 1;
 }
 
-message JoinGameResponse {
+message GameScoreResponse {
   string message = 1;
+}
+
+message JoinGameRequest {
+  string inviteCode = 1;
+  string playerName = 2;
+}
+
+message JoinGameResponse {
+  bytes gameId = 1;
+  string message = 2;
+  bytes playerId = 3;
 }
 
 message LeaveGameRequest {

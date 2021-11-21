@@ -55,7 +55,7 @@ def run():
             response = stub.GameScore(pangram_game_pb2.GameScoreRequest(gameId=gameId))
             print(response.message)
         elif player_input == "ex":
-
+            # TODO: send end game to server for the player
             response = stub.EndGame(pangram_game_pb2.EndGameRequest(gameId=gameId))
             print("\nGoodbye, Game Ended!\n" + response.message)
             break

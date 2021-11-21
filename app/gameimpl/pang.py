@@ -17,7 +17,7 @@ class PangGame(GameManager, GameTurnTemplate):
     def set_dictionary(self, word_dictionary):
         self.wordDictionary = word_dictionary
 
-    def validate_word(self, playerWord):
+    def validate_word(self, playerWord, playerId):
         """
         Check
         1. 4 letters long
@@ -51,11 +51,11 @@ class PangGame(GameManager, GameTurnTemplate):
         elif (self.game.is_found_word(playerWord)) :
             response = "Sorry the word [ " + playerWord + " ] has already been found :-( "
         else:
-            response = self.calculate_word_score(playerWord)
+            response = self.calculate_word_score(playerWord, playerId)
 
         return response
 
-    def calculate_word_score(self, word):
+    def calculate_word_score(self, word, playerId):
         """
         If checks passed calculate score:
         1. Calculate base score
@@ -86,6 +86,8 @@ class PangGame(GameManager, GameTurnTemplate):
 
         self.game.update_total_score(total_word_score)
 
+        self.game.update_player_record(word, total_word_score, playerId)      # record word player played and score.
+
         response = bonus_message + " Valid word Score is : " + str(total_word_score)
 
         return response
@@ -104,6 +106,44 @@ class PangGame(GameManager, GameTurnTemplate):
         current_score = "Total Score : " + str(self.game.total_score)
 
         summary = line_break + letters + line_break + current_score
+
+        return summary
+
+    def word_score_summary(self):
+        # output the words and their score and total score
+        line_break ="\n"
+        # construct the output
+        words = "Word Scores : " + line_break
+        for word in self.game.found_words:
+            words += str(word) + " scored " + str(self.game.found_words[word]) + " points" + line_break
+
+        total_score = "Total Score : " + str(self.game.total_score) + line_break
+
+        summary = line_break + words + total_score
+
+        return summary
+
+    def player_word_score_summary(self):
+        # output the words and their score and total score for each player
+        line_break ="\n"
+        # construct the output
+        player_points = 0
+        words = ''
+        score = ''
+        summary = ''
+
+        summary = line_break + "Total Game Score: " + str(self.game.total_score) + line_break
+        for player in self.game.players:
+            score += "Player: " + self.game.players[player].playerName + line_break + " scored "
+            for word in self.game.players[player].words:
+                words += "Word - " + str(word) + " scored " + str(self.game.players[player].words[word]) + " points" + line_break
+                player_points += self.game.players[player].words[word]
+            score += str(player_points) + " points" + line_break
+            all_output = line_break + score + words
+            score = ''
+            words = ''
+            player_points = 0
+            summary += all_output
 
         return summary
 

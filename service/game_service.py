@@ -39,3 +39,4 @@ class GameTurnTemplate(ABC):
     def game_summary(self):
         """Primitive operation. You HAVE TO override me, I'm a placeholder."""
         pass
+
