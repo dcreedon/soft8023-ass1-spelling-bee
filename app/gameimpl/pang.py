@@ -3,6 +3,8 @@ from service.game_service import GameManager
 from app.server import word_dictionary
 from datatype.enums import GameStatus
 
+import json
+
 class PangGame(GameManager, GameTurnTemplate):
 
     def __init__(self):
@@ -144,8 +146,30 @@ class PangGame(GameManager, GameTurnTemplate):
             words = ''
             player_points = 0
             summary += all_output
-
         return summary
+
+    def game_stats(self):
+
+        # output the total score and players score
+        # construct the output
+        player_points = 0
+        score = ''
+        gamestats = ''
+        player_count = 0
+
+        gamestats = "{\"gameid\":\"" + str(self.game.gameid) + "\",\"score\":\"" + str(self.game.total_score) + "\", \"players\":["
+        for player in self.game.players:
+            player_count += 1
+            score += "{\"playername\":\"" + self.game.players[player].playerName + "\","
+            for word in self.game.players[player].words:
+                player_points += self.game.players[player].words[word]
+            score += "\"points\":\"" + str(player_points) + "\"}"
+            if (len(self.game.players) > 1 and player_count < len(self.game.players)): score += ","
+            gamestats += score
+            player_points = 0
+            score = ''
+        gamestats += "]}"
+        return gamestats
 
     def end_game(self):
         response = "bye"

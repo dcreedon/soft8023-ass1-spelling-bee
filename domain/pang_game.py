@@ -6,7 +6,7 @@ import uuid
 class PangGame:
 
     def __init__(self):
-        self.status = GameStatus.INVALID
+        self.gameid = ''
         self.players = {}
         self.total_score = 0
         self.letters = []
@@ -52,4 +52,7 @@ class PangGame:
 
     def update_player_record(self, word, total_word_score, playerId):       # update the individual player record with the word and score
         self.players[playerId].words[word]=total_word_score
+
+    def set_gameid(self, gameid):
+        self.gameid = gameid
 

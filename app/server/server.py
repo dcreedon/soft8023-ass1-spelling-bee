@@ -32,6 +32,7 @@ class GameServer(PangramGameServicer):
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='mid-game-stats')
 
+
     def CreateGame(self, request, context):
         """
         setup the game instance store it in the registry, set the game dictionary
@@ -44,12 +45,13 @@ class GameServer(PangramGameServicer):
         new_game.set_dictionary(self.word_dictionary)
         new_game.set_game(game)
         game_id = self.registry.add_game(new_game)  #add the new game instance to the registry and get a unique game id
+        game.set_gameid(game_id)                    # set the game ID in the game instance
         #generate invite code, store in game and also in registry for lookup
         invite_code  = str(game_id)[0:4]       # first four chars of game_id/uuid as the invite code
         game.add_invite_code(invite_code)       # store the invite code in the game instance
         self.registry.add_invite_code(invite_code, game_id)     # put the invite code in the regsitry along with the game id to allow lookup of associated game id
 
-        print("Game Id : " + str(game_id.bytes))
+        print("Game Id : " + str(game_id))
         print("Invite Code: " + str(invite_code))
         return GameResponse(gameId=game_id.bytes, inviteCode=str(invite_code), playerId=player_id.bytes)  #return the unique game id and invite code to the client
 
@@ -92,15 +94,18 @@ class GameServer(PangramGameServicer):
     def GameScore(self, request, context):
         new_game = self.registry.get_game(request.gameId)
         message = new_game.player_word_score_summary()
+        gamestats = new_game.game_stats()
         #send stats to rabbit message queue - easier to test
-        self.channel.basic_publish(exchange='', routing_key='mid-game-stats', body=message)
+
+        print("Game Status sent to RabbitMQ: " +  gamestats)
+        self.channel.basic_publish(exchange='', routing_key='mid-game-stats', body=gamestats)
+        #close rabbit mq connection
+        #self.connection.close()
         return GameScoreResponse(message=message)
 
     def EndGame(self, request, context):
         new_game = self.registry.get_game(request.gameId)
         message = new_game.player_word_score_summary()
-        #close rabbit mq connection
-        #self.connection.close()
 
         return EndGameResponse(message=message)
 
